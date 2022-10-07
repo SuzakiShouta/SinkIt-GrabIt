@@ -55,7 +55,12 @@ class Estimation(application: MainApplication) {
     }
 
     private fun isInWater() {
-        if (pressureStability) isInWater = queue.queue.last() < basePressure - inWaterThreshold
+        if (pressureStability) {
+            isInWater = queue.queue.last() < basePressure - inWaterThreshold
+            app.setInWater(true)
+        } else {
+            app.setInWater(false)
+        }
     }
 
     fun fishAppear() {

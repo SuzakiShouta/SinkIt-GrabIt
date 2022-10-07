@@ -37,6 +37,13 @@ class MainApplication: Application() {
 //        Log.d(LOGNAME,"fishExist is ".plus(fishExist.value))
     }
 
+    // 水中かどうか
+    private val _inWater = MutableLiveData<Boolean>(false)
+    val inWater: LiveData<Boolean> = _inWater
+    fun setInWater(boolean: Boolean) {
+        _inWater.postValue(boolean)
+    }
+
     override fun onCreate() {
         super.onCreate()
 

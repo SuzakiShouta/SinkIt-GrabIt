@@ -2,7 +2,7 @@ package b22712.SinkItGrabIt.ui.game
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import b22712.gasagasa.databinding.ActivityGameBinding
+import b22712.SinkItGrabIt.databinding.ActivityGameBinding
 
 class GameActivity : AppCompatActivity() {
 

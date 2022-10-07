@@ -1,17 +1,14 @@
 package b22712.SinkItGrabIt.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import b22712.SinkItGrabIt.MainApplication
-import b22712.gasagasa.databinding.FragmentHomeBinding
-import b22712.SinkItGrabIt.ui.basePressure.BasePressureFragment
+import b22712.SinkItGrabIt.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 

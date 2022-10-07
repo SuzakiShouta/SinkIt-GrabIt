@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import b22712.SinkItGrabIt.MainApplication
-import b22712.gasagasa.databinding.FragmentBasePressureBinding
+import b22712.SinkItGrabIt.databinding.FragmentBasePressureBinding
+
 
 class BasePressureFragment : Fragment() {
 

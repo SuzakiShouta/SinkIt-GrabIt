@@ -2,10 +2,7 @@ package b22712.SinkItGrabIt
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import b22712.gasagasa.databinding.ActivityMainBinding
-import b22712.SinkItGrabIt.ui.basePressure.BasePressureFragment
+import b22712.SinkItGrabIt.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

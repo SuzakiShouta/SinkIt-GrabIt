@@ -1,4 +1,4 @@
-package b22712.gasagasa
+package b22712.SinkItGrabIt
 
 import org.junit.Test
 

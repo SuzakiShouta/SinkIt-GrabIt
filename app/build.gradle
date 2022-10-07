@@ -7,7 +7,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "b22712.gasagasa"
+        applicationId "b22712.SinkItGrabIt"
         minSdk 26
         targetSdk 32
         versionCode 1

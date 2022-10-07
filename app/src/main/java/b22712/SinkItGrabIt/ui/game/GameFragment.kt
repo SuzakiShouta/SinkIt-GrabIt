@@ -1,25 +1,20 @@
 package b22712.SinkItGrabIt.ui.game
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import b22712.SinkItGrabIt.MainApplication
-import b22712.gasagasa.R
-import b22712.gasagasa.databinding.FragmentBasePressureBinding
-import b22712.gasagasa.databinding.FragmentGameBinding
-import b22712.SinkItGrabIt.ui.basePressure.BasePressureViewModel
-import b22712.SinkItGrabIt.ui.basePressure.BasePressureViewModelFactory
+import b22712.SinkItGrabIt.databinding.FragmentGameBinding
 
 
 class GameFragment : Fragment() {
 
     val LOGNAME = "GameFragment"
 
-    private val gameViewModel: BasePressureViewModel by viewModels{
+    private val gameViewModel: GameViewModel by viewModels{
         GameViewModelFactory((requireActivity().application as MainApplication))
     }
 
@@ -47,15 +42,14 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         app.push.observe(viewLifecycleOwner) {
+            gameViewModel.push(it)
             if(it) {
                 binding.textPush.text = "押してる！"
                 if(app.fishExist.value == true) {
-                    app.vibratorAction.vibrate(3000, 255)
                     binding.textFish.text = "捕獲！"
                 }
             } else {
                 binding.textPush.text = "押してない！"
-                app.vibratorAction.vibrateStop()
             }
         }
 
