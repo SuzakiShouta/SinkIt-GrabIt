@@ -21,7 +21,7 @@ class Estimation(application: MainApplication) {
     var pressureRelativeNum: Int = 5 //何データ見るか
 
     var isInWater: Boolean = false
-    val inWaterThreshold: Int = 1 //hPa
+    val inWaterThreshold: Float = 1F //hPa
 
     private fun isStabile() {
         var min: Float = 99999.9F
@@ -56,10 +56,10 @@ class Estimation(application: MainApplication) {
 
     private fun isInWater() {
         if (pressureStability) {
-            isInWater = queue.queue.last() < basePressure - inWaterThreshold
-            app.setInWater(true)
+            isInWater = queue.queue.last() > basePressure + inWaterThreshold
+            app.setInWater(isInWater)
         } else {
-            app.setInWater(false)
+            app.setInWater(isInWater)
         }
     }
 
@@ -83,7 +83,7 @@ class Estimation(application: MainApplication) {
         for (pressure in queue) {
             sum += pressure
         }
-        basePressure = sum / queue.size
+        basePressure = sum / (queue.size - 1)
         Log.d(LOGNAME, "basePressure = ".plus(basePressure))
     }
 

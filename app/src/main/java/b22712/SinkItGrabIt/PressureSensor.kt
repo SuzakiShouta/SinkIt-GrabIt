@@ -36,11 +36,9 @@ class PressureSensor(application: MainApplication): SensorEventListener {
         var pressure: Float = event.values[0]
         queue.addQueue(pressure)
         if(loging) { save(pressure) }
-        if(basePressureLog) { queue.addBasePressureQueue(pressure)
-            Log.d(LOGNAME, queue.basePressureQueue.size.toString())
-        }
+        if(basePressureLog) { queue.addBasePressureQueue(pressure) }
         app.estimation.estimation()
-//        Log.d(LOGNAME, pressure.toString())
+        Log.d(LOGNAME, pressure.toString())
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {

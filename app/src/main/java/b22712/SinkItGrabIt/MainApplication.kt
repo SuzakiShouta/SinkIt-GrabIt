@@ -34,7 +34,7 @@ class MainApplication: Application() {
     val fishExist: LiveData<Boolean> = _fishExist
     fun setFishExist(boolean: Boolean) {
         _fishExist.postValue(boolean)
-//        Log.d(LOGNAME,"fishExist is ".plus(fishExist.value))
+        Log.d(LOGNAME,"fishExist is ".plus(fishExist.value))
     }
 
     // 水中かどうか

@@ -62,6 +62,12 @@ class GameFragment : Fragment() {
             }
         }
 
+        app.inWater.observe(viewLifecycleOwner) {
+            if (!it && gameViewModel.isFishGrab.value!!) {
+                gameViewModel.createGetFishFragment(this, binding.layoutResult.id)
+            }
+        }
+
         binding.buttonBuck.setOnClickListener {
             activity?.finish();
         }
