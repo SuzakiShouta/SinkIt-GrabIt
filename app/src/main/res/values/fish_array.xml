@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name ="shallow_fish">
+        <item>@drawable/fish_shallow01</item>
+        <item>@drawable/fish_shallow02</item>
+        <item>@drawable/fish_shallow03</item>
+    </array>
+
+    <array name="deep_fish">
+        <item>@drawable/fish_deep01</item>
+    </array>
+</resources>

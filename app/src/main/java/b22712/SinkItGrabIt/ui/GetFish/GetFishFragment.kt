@@ -39,6 +39,8 @@ class GetFishFragment: Fragment() {
             getFragmentManager()?.beginTransaction()?.remove(this)?.commit();
         }
 
+        binding.imageViewFish.setImageDrawable(getFishViewModel.createFish())
+
     }
 
     companion object {

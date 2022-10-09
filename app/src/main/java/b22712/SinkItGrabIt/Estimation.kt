@@ -71,11 +71,18 @@ class Estimation(application: MainApplication) {
         }
     }
 
+    fun setDepth() {
+        if (pressureStability) {
+            app.setDepth(queue.queue.last() - basePressure)
+        }
+    }
+
     fun estimation(){
         isStabile()
         isPush()
         isInWater()
         fishAppear()
+        setDepth()
     }
 
     fun setBasePressure(queue: ArrayDeque<Float>) {

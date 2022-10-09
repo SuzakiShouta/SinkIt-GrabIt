@@ -44,6 +44,13 @@ class MainApplication: Application() {
         _inWater.postValue(boolean)
     }
 
+    // 水深
+    private val _depth = MutableLiveData<Float>(0F)
+    val depth: LiveData<Float> = _depth
+    fun setDepth(float: Float) {
+        _depth.postValue(float)
+    }
+
     override fun onCreate() {
         super.onCreate()
 
