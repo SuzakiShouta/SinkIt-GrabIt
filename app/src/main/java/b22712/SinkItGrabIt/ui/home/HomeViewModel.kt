@@ -13,6 +13,8 @@ import b22712.SinkItGrabIt.ui.basePressure.BasePressureFragment
 
 class HomeViewModel(application: MainApplication) : ViewModel() {
 
+    val app = application
+
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
     }
@@ -28,6 +30,22 @@ class HomeViewModel(application: MainApplication) : ViewModel() {
         transaction.replace(layoutId, GetFishFragment.newInstance())
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    private var wasPush = false
+    fun startGamePreparation(push: Boolean): Boolean{
+        if(!wasPush && push){
+            // 押す前，押した時
+            wasPush = true
+            app.vibratorAction.vibrate(5000, 10)
+            return false
+        } else if (wasPush && !push) {
+            // 押した後，離した時
+            wasPush = false
+            app.vibratorAction.vibrateStop()
+            return true
+        }
+        return false
     }
 
 

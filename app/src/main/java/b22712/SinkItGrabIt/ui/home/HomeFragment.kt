@@ -50,6 +50,12 @@ class HomeFragment : Fragment() {
             homeViewModel.viewBasePressureFragment(this, binding.basePressureLayout.id)
         }
 
+        app.push.observe(viewLifecycleOwner){
+            if(homeViewModel.startGamePreparation(it)) {
+                homeViewModel.viewBasePressureFragment(this, binding.basePressureLayout.id)
+            }
+        }
+
     }
 
     override fun onDestroyView() {
