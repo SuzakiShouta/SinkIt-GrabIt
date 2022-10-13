@@ -16,11 +16,6 @@ class HomeViewModel(application: MainApplication) : ViewModel() {
 
     val app = application
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
-
     fun viewBasePressureFragment(fragment: Fragment, layoutId: Int) {
         val transaction: FragmentTransaction = fragment.parentFragmentManager.beginTransaction()
         transaction.replace(layoutId, BasePressureFragment.newInstance())
