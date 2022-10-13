@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import b22712.SinkItGrabIt.MainApplication
 import b22712.SinkItGrabIt.ui.GetFish.GetFishFragment
 import b22712.SinkItGrabIt.ui.basePressure.BasePressureFragment
+import b22712.SinkItGrabIt.ui.game.GameFragment
 
 class HomeViewModel(application: MainApplication) : ViewModel() {
 
@@ -21,13 +22,8 @@ class HomeViewModel(application: MainApplication) : ViewModel() {
     val text: LiveData<String> = _text
 
     fun viewBasePressureFragment(fragment: Fragment, layoutId: Int) {
-//        val transaction: FragmentTransaction = fragment.parentFragmentManager.beginTransaction()
-//        transaction.replace(layoutId, BasePressureFragment.newInstance())
-//        transaction.addToBackStack(null)
-//        transaction.commit()
-
         val transaction: FragmentTransaction = fragment.parentFragmentManager.beginTransaction()
-        transaction.replace(layoutId, GetFishFragment.newInstance())
+        transaction.replace(layoutId, BasePressureFragment.newInstance())
         transaction.addToBackStack(null)
         transaction.commit()
     }
@@ -47,7 +43,5 @@ class HomeViewModel(application: MainApplication) : ViewModel() {
         }
         return false
     }
-
-
 
 }

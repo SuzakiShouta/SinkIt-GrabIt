@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import b22712.SinkItGrabIt.AnimationProvider
 import b22712.SinkItGrabIt.MainApplication
 import b22712.SinkItGrabIt.databinding.FragmentGameBinding
 
@@ -40,6 +41,13 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        gameViewModel.setFragmentSize(view)
+        gameViewModel.bubble(binding.bubble)
+        gameViewModel.bubble(binding.bubble2)
+        gameViewModel.bubble(binding.bubble3)
+        gameViewModel.bubble(binding.bubble4)
+        gameViewModel.bubble(binding.bubble5)
 
         app.push.observe(viewLifecycleOwner) {
             gameViewModel.push(it)

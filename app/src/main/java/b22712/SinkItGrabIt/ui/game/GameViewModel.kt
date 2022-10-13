@@ -1,11 +1,14 @@
 package b22712.SinkItGrabIt.ui.game
 
 import android.os.Handler
+import android.util.Log
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import b22712.SinkItGrabIt.AnimationProvider
 import b22712.SinkItGrabIt.MainApplication
 import b22712.SinkItGrabIt.ui.GetFish.GetFishFragment
 import b22712.SinkItGrabIt.ui.basePressure.BasePressureFragment
@@ -20,6 +23,26 @@ class GameViewModel(application: MainApplication) : ViewModel() {
     val isFishGrab: LiveData<Boolean> = _isFishGrab
     fun setFishGrab(boolean: Boolean) {
         _isFishGrab.postValue(boolean)
+    }
+
+    var width = 1080 + 200
+    var height = 2000 + 400
+    fun setFragmentSize(view: View) {
+        view?.post {
+            width = view?.width + 100
+            height = view?.height + 400
+            Log.d(LOGNAME, width.toString().plus(",").plus(height))
+            for(bubble in bubbles){
+                bubble.setFragmentSize(width,height)
+            }
+        }
+    }
+
+    var bubbles: ArrayList<Bubble> = arrayListOf()
+    fun bubble(view: View) {
+        val bubble = Bubble(view)
+        bubble.setFragmentSize(width,height)
+        bubbles.add(bubble)
     }
 
     fun push(push: Boolean) {

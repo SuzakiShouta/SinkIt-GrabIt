@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <!-- Viewの背景色を設定 -->
+            <solid android:color="#feaaaaaa" />
+            <!-- Viewの角丸を設定 -->
+            <corners android:radius="999999dp" />
+        </shape>
+    </item>
+</selector>
