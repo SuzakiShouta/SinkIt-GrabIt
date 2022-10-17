@@ -1,11 +1,14 @@
 package b22712.SinkItGrabIt.ui.GetFish
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import b22712.SinkItGrabIt.MainActivity
 import b22712.SinkItGrabIt.MainApplication
 import b22712.SinkItGrabIt.databinding.FragmentGetFishBinding
 
@@ -41,6 +44,9 @@ class GetFishFragment: Fragment() {
 
         binding.imageViewFish.setImageDrawable(getFishViewModel.createFish())
 
+        binding.buttonTwitter.setOnClickListener {
+            getFishViewModel.openChooserToShareThisApp(this)
+        }
     }
 
     companion object {

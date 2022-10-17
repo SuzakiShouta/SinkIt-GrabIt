@@ -18,7 +18,7 @@ class HomeViewModel(application: MainApplication) : ViewModel() {
 
     fun viewBasePressureFragment(fragment: Fragment, layoutId: Int) {
         val transaction: FragmentTransaction = fragment.parentFragmentManager.beginTransaction()
-        transaction.replace(layoutId, BasePressureFragment.newInstance())
+        transaction.replace(layoutId, GetFishFragment.newInstance())
         transaction.addToBackStack(null)
         transaction.commit()
     }
