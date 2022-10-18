@@ -7,6 +7,10 @@
         <item>@drawable/fish_shallow03</item>
     </array>
 
+    <array name="middle_fish">
+        <item>@drawable/fish_deep01</item>
+    </array>
+
     <array name="deep_fish">
         <item>@drawable/fish_deep01</item>
     </array>

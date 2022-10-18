@@ -2,21 +2,14 @@ package b22712.SinkItGrabIt.ui.GetFish
 
 import android.content.Intent
 import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.provider.MediaStore
-import android.text.format.DateFormat
 import android.util.Log
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import b22712.SinkItGrabIt.BuildConfig
-import b22712.SinkItGrabIt.FishCreater
+import b22712.SinkItGrabIt.FishCreator
 import b22712.SinkItGrabIt.MainApplication
-import b22712.SinkItGrabIt.R
 import java.io.File
-import java.io.IOException
-import java.util.*
 
 
 class GetFishViewModel(application: MainApplication) : ViewModel(){
@@ -24,15 +17,25 @@ class GetFishViewModel(application: MainApplication) : ViewModel(){
     val app = application
     val LOGNAME = "GetFishViewModel"
     val packageName = "b22712.SinkItGrabIt"
+    var fishImageId: Int = 0
+    var fishImageName: String = ""
 
     fun createFish(): Drawable? {
-        return FishCreater(app).create()
+        val fishCreator: FishCreator = FishCreator(app)
+        fishCreator.create()
+        fishImageId = fishCreator.id
+        fishImageName = fishCreator.name
+        Log.d(LOGNAME, fishImageName)
+        return fishCreator.drawable
     }
 
     /// このアプリをSNSシェアできるIntentを起動する
     fun openChooserToShareThisApp(fragment: Fragment) {
 
-        val imageUri = fragment.resources.openRawResource(R.raw.fish_deep01).let { input ->
+//        val name = "fish_deep01"
+        val id: Int = fragment.requireActivity().resources.getIdentifier(fishImageName, "raw", fragment.requireActivity().packageName)
+
+        val imageUri = fragment.resources.openRawResource(id).let { input ->
             val file = File("${fragment.requireActivity().cacheDir}/image.png")
             file.createNewFile()
             file.outputStream().use { output ->
