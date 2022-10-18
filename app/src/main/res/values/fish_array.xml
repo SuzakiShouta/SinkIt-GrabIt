@@ -2,16 +2,32 @@
 <resources>
 
     <array name ="shallow_fish">
-        <item>@drawable/fish_shallow01</item>
-        <item>@drawable/fish_shallow02</item>
-        <item>@drawable/fish_shallow03</item>
+        <item>@drawable/fish_shallow1</item>
+        <item>@drawable/fish_shallow2</item>
+        <item>@drawable/fish_shallow3</item>
+        <item>@drawable/fish_shallow4</item>
+        <item>@drawable/fish_shallow5</item>
+        <item>@drawable/fish_shallow6</item>
+        <item>@drawable/fish_shallow7</item>
+        <item>@drawable/fish_shallow8</item>
+        <item>@drawable/fish_shallow9</item>
     </array>
 
     <array name="middle_fish">
-        <item>@drawable/fish_deep01</item>
+        <item>@drawable/fish_middle1</item>
+        <item>@drawable/fish_middle2</item>
+        <item>@drawable/fish_middle3</item>
+        <item>@drawable/fish_middle4</item>
+        <item>@drawable/fish_middle5</item>
+        <item>@drawable/fish_middle6</item>
+        <item>@drawable/fish_middle7</item>
+        <item>@drawable/fish_middle8</item>
+        <item>@drawable/fish_middle9</item>
     </array>
 
     <array name="deep_fish">
-        <item>@drawable/fish_deep01</item>
+        <item>@drawable/fish_deep1</item>
+        <item>@drawable/fish_deep2</item>
+        <item>@drawable/fish_deep3</item>
     </array>
 </resources>
