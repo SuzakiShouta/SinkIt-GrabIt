@@ -62,7 +62,7 @@ class Estimation(application: MainApplication) {
     }
 
     fun fishAppear() {
-        Log.d(LOGNAME, "stability $pressureStability, isInwater $isInWater")
+//        Log.d(LOGNAME, "stability $pressureStability, isInwater $isInWater")
         if (pressureStability && isInWater) {
             fishEncounter.fishAppearNum++
         } else {
@@ -90,10 +90,8 @@ class Estimation(application: MainApplication) {
             sum += pressure
 //            Log.d(LOGNAME, "pressure = ".plus(pressure))
         }
-        basePressure = sum / (queue.size -1)
-        //todo
-        basePressure = 900F
-//        Log.d(LOGNAME, "basePressure = $basePressure, sum = $sum, size = ${queue.size}")
+        basePressure = sum / (queue.size)
+        Log.d(LOGNAME, "basePressure = $basePressure, sum = $sum, size = ${queue.size}")
     }
 
 
