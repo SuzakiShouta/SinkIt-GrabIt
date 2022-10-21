@@ -9,16 +9,16 @@ import java.util.*
 class FishEncounter(app: MainApplication) {
 
     val LOGNAME = "FishEncounter"
-    val Frequency = 15
+    val Frequency = 30
     val app: MainApplication = app
 
     // 魚が出現する条件：水中，気圧安定，３s
-    val fishEncountMinTime: Int = 3 // 魚が出現するために必要な時間
-    val fishEncountMaxTime: Int = 7 // 絶対魚が出るライン
-    val fishExitTime: Long = 3000L // 出現してから逃げる時間
+    val fishEncountMinTime: Int = 5 // 魚が出現するために必要な時間
+    val fishEncountMaxTime: Int = 10 // 絶対魚が出るライン
+    val fishExitTime: Long = 5000L // 出現してから逃げる時間
 
     // 魚が生成される数字
-    var encountThreshold: Long= 3L * Frequency
+    var encountThreshold: Long= 5L * Frequency
 
     // 気圧が安定していて，水中にいる時間
     var fishAppearNum: Int = 0
@@ -35,7 +35,10 @@ class FishEncounter(app: MainApplication) {
     }
 
     private fun task() {
-        if (fishAppearNum > encountThreshold) { fishCreate() }
+        if (fishAppearNum > encountThreshold) {
+            fishCreate()
+            Log.d(LOGNAME, "fish Create")
+        }
     }
 
     private fun fishCreate() {
@@ -44,9 +47,11 @@ class FishEncounter(app: MainApplication) {
         fishAppearNum = 0
         val fishHandler = Handler(Looper.getMainLooper())
         app.setFishExist(true)
+        Log.d(LOGNAME, "fishExist true")
         fishHandler.postDelayed({
             app.setFishExist(false)
             start()
+            Log.d(LOGNAME, "fishExist false")
         },fishExitTime)
     }
 
@@ -63,6 +68,7 @@ class FishEncounter(app: MainApplication) {
     fun setEncountNum () {
         val renge = (fishEncountMinTime..fishEncountMaxTime)
         encountThreshold = renge.random().toLong() * Frequency
+        Log.d(LOGNAME, "setEncountNum $encountThreshold")
     }
 
 }

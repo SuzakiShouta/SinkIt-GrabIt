@@ -41,7 +41,10 @@ class MainApplication: Application() {
     private val _inWater = MutableLiveData<Boolean>(false)
     val inWater: LiveData<Boolean> = _inWater
     fun setInWater(boolean: Boolean) {
-        _inWater.postValue(boolean)
+        if(boolean != inWater.value) {
+            _inWater.postValue(boolean)
+            Log.d(LOGNAME,"inWater is ".plus(inWater.value))
+        }
     }
 
     // 水深

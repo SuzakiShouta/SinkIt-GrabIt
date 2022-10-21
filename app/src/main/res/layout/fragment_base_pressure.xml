@@ -31,22 +31,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="基準となる気圧を\n測定します．"
+                android:text="ゲームを遊ぶための\n準備をします．"
                 android:textSize="34sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView_settingNow"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:text="準備中"
-                android:textSize="34sp"
+                android:layout_marginEnd="16dp"
+                android:text="携帯を安定した場所に置いて\n準備開始ボタンを押してください"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textVIew_pressure" />
+
+            <TextView
+                android:id="@+id/textView_settingNow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:textSize="60sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <Button
+                android:id="@+id/button_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="準備開始"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_settingNow"
+                app:layout_constraintVertical_bias="0.2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

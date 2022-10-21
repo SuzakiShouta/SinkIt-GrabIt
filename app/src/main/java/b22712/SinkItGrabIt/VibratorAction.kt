@@ -4,11 +4,14 @@ import android.content.Context
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import android.util.Log
 
 class VibratorAction (context: Context){
 
+    val LOGNAME = "VibratorAction"
     val context: Context = context
     var vibrator: Vibrator
+
 
     init {
         val vibratorManager = if (android.os.Build.VERSION.SDK_INT >= 31) {

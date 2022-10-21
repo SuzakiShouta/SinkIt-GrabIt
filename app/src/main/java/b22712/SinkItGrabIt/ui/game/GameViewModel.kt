@@ -51,23 +51,22 @@ class GameViewModel(application: MainApplication) : ViewModel() {
             if(app.fishExist.value == true){
                 fishGrab()
             }
-            setFishGrab(true)
         } else {
-            app.vibratorAction.vibrateStop()
+//            app.vibratorAction.vibrateStop()
         }
     }
 
     fun fishGrab() {
 
         setFishGrab(true)
-        app.vibratorAction.vibrate(10000, 255)
+        app.vibratorAction.vibrate(5000, 255)
 
         val hnd0 = Handler()
         val task = Runnable {
             app.vibratorAction.vibrateStop()
             setFishGrab(false)
         }
-        hnd0.postDelayed(task,10000)
+        hnd0.postDelayed(task,5000)
     }
 
     // 第一引数は自分自身，第二引数はどこに表示するか

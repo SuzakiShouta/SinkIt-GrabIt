@@ -2,15 +2,15 @@ package b22712.SinkItGrabIt
 
 class Queue {
     val queue:ArrayDeque<Float> = ArrayDeque(arrayListOf(9999F, 9999F, 9999F, 9999F, 9999F, 9999F, 9999F, 9999F, 9999F, 9999F))
-    val queueCapacity: Int = 10
+    val queueCapacity: Int = 15
 
     val stringQueue: ArrayDeque<String> = ArrayDeque(30)
 
     val FishAppearQueue: ArrayDeque<Boolean> = ArrayDeque(arrayListOf(false))
     val FishAppearQueueCapacity: Int = 100
 
-    val basePressureQueue: ArrayDeque<Float> = ArrayDeque(arrayListOf(0F))
-    val basePressureQueueCapacity: Int = 45
+    val basePressureQueue: ArrayDeque<Float> = ArrayDeque(arrayListOf())
+    val basePressureQueueCapacity: Int = 75
 
     fun addQueue(value: Float){
 //        println(queue)

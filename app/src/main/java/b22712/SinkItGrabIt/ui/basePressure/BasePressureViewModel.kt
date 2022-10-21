@@ -17,15 +17,20 @@ class BasePressureViewModel(application: MainApplication) : ViewModel(){
 
     val app = application
 
+    fun startGame(fragment: Fragment){
+        val intent = Intent(app.applicationContext, GameActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        app.applicationContext.startActivity(intent)
+    }
 
     fun setBasePressure(fragment: Fragment, textView: TextView){
 
         val hnd0 = Handler()
         //最後に実行されるやつ
         val replaceGameFragment = Runnable {
-            val intent = Intent(app.applicationContext, GameActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            app.applicationContext.startActivity(intent)
+//            val intent = Intent(app.applicationContext, GameActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//            app.applicationContext.startActivity(intent)
             fragment.getFragmentManager()?.beginTransaction()?.remove(fragment)?.commit();
         }
         //次に実行されるやつ

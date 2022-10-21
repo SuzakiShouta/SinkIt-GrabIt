@@ -1,6 +1,7 @@
 package b22712.SinkItGrabIt.ui.game
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -64,14 +65,18 @@ class GameFragment : Fragment() {
         app.fishExist.observe(viewLifecycleOwner){
             if(it){
                 binding.textFish.text = "魚がいます"
-                app.vibratorAction.vibrate(2000, 100)
+                app.vibratorAction.vibrate(3000, 100)
+                Log.d(LOGNAME, "魚がいます")
             } else {
                 binding.textFish.text = "魚がいません"
+                Log.d(LOGNAME, "魚がいません")
             }
         }
 
         app.inWater.observe(viewLifecycleOwner) {
+            Log.d(LOGNAME, "inWater $it , isFishGrab ${gameViewModel.isFishGrab.value!!}")
             if (!it && gameViewModel.isFishGrab.value!!) {
+                gameViewModel.setFishGrab(false)
                 gameViewModel.createGetFishFragment(this, binding.layoutResult.id)
             }
         }

@@ -22,7 +22,7 @@ class Bubble(view: View) {
             animationProvider.bubbleX(target,width)
             animationProvider.moveY(target,height.toFloat())
             randomDelay()
-            Log.d(LOGNAME,"bubble".plus(delay))
+//            Log.d(LOGNAME,"bubble".plus(delay))
             hnd0.postDelayed(this,delay)
         }
     }

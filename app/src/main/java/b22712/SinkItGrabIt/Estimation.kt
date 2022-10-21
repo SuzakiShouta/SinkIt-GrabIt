@@ -10,15 +10,16 @@ class Estimation(application: MainApplication) {
     val queue: Queue = application.queue
     val fishEncounter: FishEncounter = app.fishEncounter
     var basePressure: Float = 1013.0F
+    val frequency = 15
 
     var push: Boolean = false
     val pushThreshold: Int = 5 // hPa
 //    val takeOffThreshold: Int = pushThreshold - 1
-    var pushTime: Int  = 3 // 15Hz
+    var pushTime: Int  = frequency/5
     var pressureStability: Boolean = false // 安定しているか
     var pressureStabilityThreshold: Int = 1 // hPa
     var pressureRelative: Float = 1013.3F
-    var pressureRelativeNum: Int = 5 //何データ見るか
+    var pressureRelativeNum: Int = frequency/3 //何データ見るか
 
     var isInWater: Boolean = false
     val inWaterThreshold: Float = 1F //hPa
@@ -48,13 +49,10 @@ class Estimation(application: MainApplication) {
             push = false
         }
         app.setPush(push)
-//        Log.d(LOGNAME,"stability: ".plus(pressureStability).plus(", isPush: ").plus(push))
-//        Log.d(LOGNAME,queue.queue.last().toString()
-//            .plus(" - ").plus(pressureRelative)
-//            .plus(" = ").plus(queue.queue.last()-pressureRelative))
     }
 
     private fun isInWater() {
+//        Log.d(LOGNAME, "Base = $basePressure, now ${queue.queue.last()}")
         if (pressureStability) {
             isInWater = queue.queue.last() > basePressure + inWaterThreshold
             app.setInWater(isInWater)
@@ -64,6 +62,7 @@ class Estimation(application: MainApplication) {
     }
 
     fun fishAppear() {
+        Log.d(LOGNAME, "stability $pressureStability, isInwater $isInWater")
         if (pressureStability && isInWater) {
             fishEncounter.fishAppearNum++
         } else {
@@ -89,9 +88,12 @@ class Estimation(application: MainApplication) {
         var sum: Float = 0F
         for (pressure in queue) {
             sum += pressure
+//            Log.d(LOGNAME, "pressure = ".plus(pressure))
         }
-        basePressure = sum / (queue.size - 1)
-        Log.d(LOGNAME, "basePressure = ".plus(basePressure))
+        basePressure = sum / (queue.size -1)
+        //todo
+        basePressure = 900F
+//        Log.d(LOGNAME, "basePressure = $basePressure, sum = $sum, size = ${queue.size}")
     }
 
 

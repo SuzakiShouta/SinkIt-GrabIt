@@ -36,7 +36,11 @@ class BasePressureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        basePressureViewModel.setBasePressure(this, binding.textViewSettingNow)
+//        basePressureViewModel.setBasePressure(this, binding.textViewSettingNow)
+
+        binding.buttonSetting.setOnClickListener {
+            basePressureViewModel.setBasePressure(this, binding.textViewSettingNow)
+        }
 
     }
 
