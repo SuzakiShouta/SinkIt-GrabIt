@@ -29,5 +29,11 @@
         <item>@drawable/fish_deep1</item>
         <item>@drawable/fish_deep2</item>
         <item>@drawable/fish_deep3</item>
+        <item>@drawable/fish_deep4</item>
+        <item>@drawable/fish_deep5</item>
+        <item>@drawable/fish_deep6</item>
+        <item>@drawable/fish_deep7</item>
+        <item>@drawable/fish_deep8</item>
+        <item>@drawable/fish_deep9</item>
     </array>
 </resources>
