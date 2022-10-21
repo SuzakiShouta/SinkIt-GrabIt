@@ -44,11 +44,20 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         gameViewModel.setFragmentSize(view)
-        gameViewModel.bubble(binding.bubble)
-        gameViewModel.bubble(binding.bubble2)
-        gameViewModel.bubble(binding.bubble3)
-        gameViewModel.bubble(binding.bubble4)
-        gameViewModel.bubble(binding.bubble5)
+
+        app.inWater.observe(viewLifecycleOwner) {
+            Log.d(LOGNAME, "inWater")
+            if(it){
+                gameViewModel.bubble(binding.bubble)
+                gameViewModel.bubble(binding.bubble2)
+                gameViewModel.bubble(binding.bubble3)
+                gameViewModel.bubble(binding.bubble4)
+                gameViewModel.bubble(binding.bubble5)
+            } else {
+                Log.d(LOGNAME, "outWater")
+                gameViewModel.bubbleCrash()
+            }
+        }
 
         app.push.observe(viewLifecycleOwner) {
             gameViewModel.push(it)

@@ -51,8 +51,8 @@ class GetFishViewModel(application: MainApplication) : ViewModel(){
         )
 
         ShareCompat.IntentBuilder(fragment.requireActivity()).apply {
-            setChooserTitle("share title")
-            setText("share message")
+            setChooserTitle("「沈めて掴む」で魚を捕まえた！")
+            setText("携帯を水に沈めて強く握って魚を捕まえた！\n#沈めて掴む\n#SinlItGrabIt")
             setStream(imageUri)
             setType("image/png")
             Log.d(LOGNAME,imageUri.toString())

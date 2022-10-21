@@ -45,6 +45,10 @@ class GameViewModel(application: MainApplication) : ViewModel() {
         bubbles.add(bubble)
     }
 
+    fun bubbleCrash(){
+        var bubbles: ArrayList<Bubble> = arrayListOf()
+    }
+
     fun push(push: Boolean) {
         if(push){
             // 魚がいたら握れる，強くバイブ
