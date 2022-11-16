@@ -93,6 +93,14 @@ class GameFragment : Fragment() {
         binding.buttonBuck.setOnClickListener {
             activity?.finish();
         }
+
+        gameViewModel.isFishGrab.observe(viewLifecycleOwner) {
+            if(it){
+                binding.imgSilhouette.visibility = View.VISIBLE
+            } else {
+                binding.imgSilhouette.visibility = View.INVISIBLE
+            }
+        }
     }
 
     companion object {

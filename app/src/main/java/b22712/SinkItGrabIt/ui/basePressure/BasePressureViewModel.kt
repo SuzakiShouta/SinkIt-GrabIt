@@ -47,6 +47,7 @@ class BasePressureViewModel(application: MainApplication) : ViewModel(){
             textView.text = "設定中"
             hnd0.postDelayed(stopBasePressureTask, 3000)
         }
+        textView.text = "設定開始"
         hnd0.postDelayed(startBasePressureTask,1000)
 
     }

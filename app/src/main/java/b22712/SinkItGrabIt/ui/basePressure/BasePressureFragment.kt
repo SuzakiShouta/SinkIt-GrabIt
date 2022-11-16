@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.viewModels
 import b22712.SinkItGrabIt.MainApplication
 import b22712.SinkItGrabIt.databinding.FragmentBasePressureBinding
@@ -39,6 +40,7 @@ class BasePressureFragment : Fragment() {
 //        basePressureViewModel.setBasePressure(this, binding.textViewSettingNow)
 
         binding.buttonSetting.setOnClickListener {
+            binding.buttonSetting.isEnabled = false
             basePressureViewModel.setBasePressure(this, binding.textViewSettingNow)
         }
 
