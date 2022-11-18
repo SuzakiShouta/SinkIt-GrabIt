@@ -34,12 +34,28 @@ class HomeViewModel(application: MainApplication) : ViewModel() {
         if(!wasPush && push){
             // 押す前，押した時
             wasPush = true
-            app.vibratorAction.vibrate(5000, 100)
+            app.vibratorAction.vibrate(3000, 100)
             return false
         } else if (wasPush && !push) {
             // 押した後，離した時
             wasPush = false
-            app.vibratorAction.vibrateStop()
+//            app.vibratorAction.vibrateStop()
+            return true
+        }
+        return false
+    }
+
+    private var wasGrip = false
+    fun startGamePreparationByGrip(grip: Boolean): Boolean{
+        if(!wasGrip && grip){
+            // 押す前，押した時
+            wasGrip = true
+            app.vibratorAction.vibrate(3000, 100)
+            return false
+        } else if (wasGrip && !grip) {
+            // 押した後，離した時
+            wasGrip = false
+//            app.vibratorAction.vibrateStop()
             return true
         }
         return false
@@ -49,6 +65,7 @@ class HomeViewModel(application: MainApplication) : ViewModel() {
         val intent = Intent(app.applicationContext, GameActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         app.applicationContext.startActivity(intent)
+        app.vibratorAction.vibrateStop()
     }
 
     var width = 1080 + 200

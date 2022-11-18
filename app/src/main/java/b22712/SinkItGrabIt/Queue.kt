@@ -1,7 +1,7 @@
 package b22712.SinkItGrabIt
 
 class Queue {
-    val queue:ArrayDeque<Float> = ArrayDeque(arrayListOf(9999F, 9999F, 9999F, 9999F, 9999F, 9999F, 9999F, 9999F, 9999F, 9999F))
+    val queue:ArrayDeque<Float> = ArrayDeque(arrayListOf(0F))
     val queueCapacity: Int = 15
 
     val stringQueue: ArrayDeque<String> = ArrayDeque(30)
@@ -11,6 +11,9 @@ class Queue {
 
     val basePressureQueue: ArrayDeque<Float> = ArrayDeque(arrayListOf())
     val basePressureQueueCapacity: Int = 75
+
+    val grabQueue:ArrayDeque<Boolean> = ArrayDeque(arrayListOf())
+    val grabQueueCapacity: Int = 5
 
     fun addQueue(value: Float){
 //        println(queue)
@@ -26,6 +29,11 @@ class Queue {
     fun addBasePressureQueue(value: Float){
         while (basePressureQueue.size > basePressureQueueCapacity) {basePressureQueue.removeFirst()}
         basePressureQueue.add(value)
+    }
+
+    fun addGrabQueue(value: Boolean){
+        while (grabQueue.size > grabQueueCapacity) {grabQueue.removeFirst()}
+        grabQueue.add(value)
     }
 
     operator fun get(i: Int): Float {

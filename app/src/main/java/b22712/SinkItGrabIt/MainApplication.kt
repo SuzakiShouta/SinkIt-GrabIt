@@ -29,6 +29,13 @@ class MainApplication: Application() {
 //        Log.d(LOGNAME,"push is ".plus(push.value))
     }
 
+    private val _grip = MutableLiveData<Boolean>(false)
+    val grip: LiveData<Boolean> = _grip
+    fun setGrip(boolean: Boolean) {
+        _grip.postValue(boolean)
+//        Log.d(LOGNAME,"push is ".plus(push.value))
+    }
+
     // 魚が存在しているかどうか
     private val _fishExist = MutableLiveData<Boolean>(false)
     val fishExist: LiveData<Boolean> = _fishExist

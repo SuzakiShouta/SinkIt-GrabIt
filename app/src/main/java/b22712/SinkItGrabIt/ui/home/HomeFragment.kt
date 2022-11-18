@@ -1,6 +1,7 @@
 package b22712.SinkItGrabIt.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,7 +55,22 @@ class HomeFragment : Fragment() {
         }
 
         app.push.observe(viewLifecycleOwner){
+            Log.d(LOGNAME, "push is ".plus(it))
             if(homeViewModel.startGamePreparation(it)) {
+                homeViewModel.startGame(this)
+            }
+            if(it){
+                binding.imageView.setImageResource(R.drawable.grab_it)
+                binding.textViewStart.text = "離して！"
+            } else {
+                binding.imageView.setImageResource(R.drawable.grab_not)
+                binding.textViewStart.text = "画面を強く押して\nスタート！"
+            }
+        }
+
+        app.grip.observe(viewLifecycleOwner) {
+            Log.d(LOGNAME, "grab is ".plus(it))
+            if(homeViewModel.startGamePreparationByGrip(it)) {
                 homeViewModel.startGame(this)
             }
             if(it){

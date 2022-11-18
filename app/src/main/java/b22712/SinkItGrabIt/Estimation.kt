@@ -12,8 +12,12 @@ class Estimation(application: MainApplication) {
     var basePressure: Float = 1013.0F
     val frequency = 15
 
+    // 押す
     var push: Boolean = false
+    // 握る
+    var grip: Boolean = false
     val pushThreshold: Int = 5 // hPa
+    val gripThreshold: Int = 3 // hPa
 //    val takeOffThreshold: Int = pushThreshold - 1
     var pushTime: Int  = frequency/5
     var pressureStability: Boolean = false // 安定しているか
@@ -27,28 +31,58 @@ class Estimation(application: MainApplication) {
     private fun isStabile() {
         var min: Float = 99999.9F
         var max: Float = 0.0F
-        for (i:Int in 10-pressureRelativeNum-pushTime until 9-pushTime) {
-            val p = queue.queue[i]
-            if (min > p) { min = p }
-            if (max < p) { max = p }
-        }
-        if (max - min < pressureStabilityThreshold) {
-            pressureStability = true
-            pressureRelative = queue.queue[9-pushTime]
-        } else {
-            pressureStability = false
+        if (queue.queue.size > queue.queueCapacity - 1) {
+            for (i: Int in 10 - pressureRelativeNum - pushTime until 9 - pushTime) {
+                val p = queue.queue[i]
+                if (min > p) {
+                    min = p
+                }
+                if (max < p) {
+                    max = p
+                }
+            }
+            if (max - min < pressureStabilityThreshold) {
+                pressureStability = true
+                pressureRelative = queue.queue[9 - pushTime]
+            } else {
+                pressureStability = false
+            }
         }
     }
 
-    private fun isPush(){
+    private fun isGrab() {
+        // grab推定履歴の数データをみて一個でもtrueになってたらgrabできなくなる
 
-        if (queue.queue.last() > pressureRelative + pushThreshold && pressureStability) {
+        var wasGrab: Boolean = false
+        for (bool in queue.grabQueue) {
+            if (bool) {
+                wasGrab = true
+            }
+        }
+
+        // 押す
+        if (queue.queue.last() > pressureRelative + pushThreshold && pressureStability && !wasGrab) {
             push = true
         }
         if (queue.queue.last() < pressureRelative - pushThreshold && push) {
             push = false
         }
+        // 握る
+        if (queue.queue.last() < pressureRelative + gripThreshold && pressureStability && !wasGrab) {
+            grip = true
+        }
+        if (queue.queue.last() > pressureRelative - gripThreshold && grip) {
+            grip = false
+        }
+
+        if (push || grip) {
+            app.queue.addGrabQueue(true)
+        } else {
+            app.queue.addGrabQueue(false)
+        }
+
         app.setPush(push)
+        app.setGrip(grip)
     }
 
     private fun isInWater() {
@@ -78,7 +112,7 @@ class Estimation(application: MainApplication) {
 
     fun estimation(){
         isStabile()
-        isPush()
+        isGrab()
         isInWater()
         fishAppear()
         setDepth()
