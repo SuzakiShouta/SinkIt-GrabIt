@@ -18,6 +18,7 @@ class PressureSensor(application: MainApplication): SensorEventListener {
     private var pressureSensor: Sensor? = null
     var loging: Boolean = false
     var basePressureLog: Boolean = false
+    var frequency: Int = 0
 
     init {
         sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -36,7 +37,10 @@ class PressureSensor(application: MainApplication): SensorEventListener {
         var pressure: Float = event.values[0]
         queue.addQueue(pressure)
         if(loging) { save(pressure) }
-        if(basePressureLog) { queue.addBasePressureQueue(pressure) }
+        if(basePressureLog) {
+            frequency+=1
+            queue.addBasePressureQueue(pressure)
+        }
         app.estimation.estimation()
 //        Log.d(LOGNAME, pressure.toString())
     }

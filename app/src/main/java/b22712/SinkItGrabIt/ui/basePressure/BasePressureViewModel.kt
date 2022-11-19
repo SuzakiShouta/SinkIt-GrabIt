@@ -36,6 +36,7 @@ class BasePressureViewModel(application: MainApplication) : ViewModel(){
         //次に実行されるやつ
         val stopBasePressureTask = Runnable {
             app.pressureSensor.basePressureLog = false
+            app.estimation.setFrequency(app.pressureSensor.frequency/3)
             textView.text = "設定完了"
             Log.d(LOGNAME,app.queue.basePressureQueue.size.toString())
             app.estimation.setBasePressure(app.queue.basePressureQueue)
