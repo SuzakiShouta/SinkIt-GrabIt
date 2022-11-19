@@ -137,7 +137,6 @@ class Estimation(application: MainApplication) {
         }
         basePressure = sum / (queue.size)
 //        Log.d(LOGNAME, "basePressure = $basePressure, sum = $sum, size = ${queue.size}")
-        basePressure = 500f
     }
 
 
