@@ -39,14 +39,24 @@ class GameViewModel(application: MainApplication) : ViewModel() {
     }
 
     var bubbles: ArrayList<Bubble> = arrayListOf()
+    var wasInWater: Boolean = false
     fun bubble(view: View) {
         val bubble = Bubble(view)
         bubble.setFragmentSize(width,height)
         bubbles.add(bubble)
+        if (!wasInWater){
+            for (bubble in bubbles){
+                bubble.reStart()
+            }
+        }
+        wasInWater = true
     }
 
     fun bubbleCrash(){
-        var bubbles: ArrayList<Bubble> = arrayListOf()
+        wasInWater = false
+        for (bubble in bubbles) {
+            bubble.stop()
+        }
     }
 
     fun push(push: Boolean) {

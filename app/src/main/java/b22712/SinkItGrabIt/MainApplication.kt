@@ -25,14 +25,18 @@ class MainApplication: Application() {
     private val _push = MutableLiveData<Boolean>(false)
     val push: LiveData<Boolean> = _push
     fun setPush(boolean: Boolean) {
-        _push.postValue(boolean)
+        if (push.value != boolean) {
+            _push.postValue(boolean)
+        }
 //        Log.d(LOGNAME,"push is ".plus(push.value))
     }
 
     private val _grip = MutableLiveData<Boolean>(false)
     val grip: LiveData<Boolean> = _grip
     fun setGrip(boolean: Boolean) {
-        _grip.postValue(boolean)
+        if (grip.value != boolean){
+            _grip.postValue(boolean)
+        }
 //        Log.d(LOGNAME,"push is ".plus(push.value))
     }
 
@@ -50,7 +54,7 @@ class MainApplication: Application() {
     fun setInWater(boolean: Boolean) {
         if(boolean != inWater.value) {
             _inWater.postValue(boolean)
-            Log.d(LOGNAME,"inWater is ".plus(inWater.value))
+            Log.d(LOGNAME,"inWater is ".plus(boolean))
         }
     }
 

@@ -17,29 +17,28 @@ class Estimation(application: MainApplication) {
     // 握る
     var grip: Boolean = false
     val pushThreshold: Int = 5 // hPa
-    val gripThreshold: Int = 3 // hPa
+    val gripThreshold: Int = 5 // hPa
 //    val takeOffThreshold: Int = pushThreshold - 1
-    var pushTime: Int  = baseFrequency/5
+    var pushTime: Int  = baseFrequency/7
     var pressureStability: Boolean = false // 安定しているか
-    var pressureStabilityThreshold: Int = 1 // hPa
+    var pressureStabilityThreshold: Float = 0.5f // hPa
     var pressureRelative: Float = 1013.3F
-    var pressureRelativeNum: Int = baseFrequency/3 //何データ見るか
+    var pressureRelativeNum: Int = baseFrequency/5 //何データ見るか
 
     var isInWater: Boolean = false
-    val inWaterThreshold: Float = 1F //hPa
+    val inWaterThreshold: Float = 2F //hPa
 
     fun setFrequency(frequency: Int) {
-        pushTime = frequency/5
-        pressureRelativeNum = frequency/3
-
+        pushTime = frequency/7
+        pressureRelativeNum = frequency/5
+        Log.d(LOGNAME, "f $frequency")
     }
 
     private fun isStabile() {
         var min: Float = 99999.9F
         var max: Float = 0.0F
-        var sum: Float = 0.0f
         if (queue.queue.size > queue.queueCapacity - 1) {
-            for (i: Int in queue.queue.size - pressureRelativeNum - pushTime until queue.queue.size - 1 - pushTime) {
+            for (i: Int in queue.queue.size - pressureRelativeNum - pushTime until queue.queue.size -1 - pushTime) {
                 val p = queue.queue[i]
                 if (min > p) {
                     min = p
@@ -47,12 +46,11 @@ class Estimation(application: MainApplication) {
                 if (max < p) {
                     max = p
                 }
-                sum+=p
             }
-            Log.d(LOGNAME, "sum = $sum, ".plus(queue.queue.size).plus(",").plus(queue.queue.size - pressureRelativeNum - pushTime))
+//            Log.d(LOGNAME, "sum = $sum, ".plus(queue.queue.size).plus(",").plus(queue.queue.size - pressureRelativeNum - pushTime))
             if (max - min < pressureStabilityThreshold) {
                 pressureStability = true
-                pressureRelative = sum/(pressureRelativeNum - 1)
+                pressureRelative = queue.queue[queue.queue.size -1 - pushTime]
             } else {
                 pressureStability = false
             }
@@ -89,8 +87,8 @@ class Estimation(application: MainApplication) {
         } else {
             app.queue.addGrabQueue(false)
         }
-//        Log.d(LOGNAME, "push = $push, grip = $grip, grab = $wasGrab, Rera")
-//        Log.d(LOGNAME, "last = ".plus(queue.queue.last()).plus(", st = $pressureStability, relative = $pressureRelative"))
+        Log.d(LOGNAME.plus(1), "push = $push, grip = $grip, grab = $wasGrab, inWater = ".plus(app.inWater.value))
+        Log.d(LOGNAME.plus(2), "last = ".plus(queue.queue.last()).plus(", st = $pressureStability, relative = $pressureRelative").plus(", push = $push, inWater = ").plus(app.inWater.value))
 
         app.setPush(push)
         app.setGrip(grip)
@@ -98,6 +96,7 @@ class Estimation(application: MainApplication) {
 
     private fun isInWater() {
 //        Log.d(LOGNAME, "Base = $basePressure, now ${queue.queue.last()}")
+
         if (pressureStability) {
             isInWater = queue.queue.last() > basePressure + inWaterThreshold
             app.setInWater(isInWater)
@@ -136,7 +135,7 @@ class Estimation(application: MainApplication) {
 //            Log.d(LOGNAME, "pressure = ".plus(pressure))
         }
         basePressure = sum / (queue.size)
-//        Log.d(LOGNAME, "basePressure = $basePressure, sum = $sum, size = ${queue.size}")
+        Log.d(LOGNAME, "basePressure = $basePressure, sum = $sum, size = ${queue.size}")
     }
 
 

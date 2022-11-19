@@ -35,6 +35,15 @@ class Bubble(view: View) {
         hnd0.postDelayed(engage,delay)
     }
 
+    fun stop() {
+        target.visibility = View.INVISIBLE
+    }
+
+    fun reStart() {
+        target.visibility = View.VISIBLE
+    }
+
+
     fun randomDelay(){
         delay = floor(Math.random() * 10000).toLong() + 8000
     }

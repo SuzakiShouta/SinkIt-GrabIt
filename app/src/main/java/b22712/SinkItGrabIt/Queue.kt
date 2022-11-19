@@ -2,7 +2,7 @@ package b22712.SinkItGrabIt
 
 class Queue {
     val queue:ArrayDeque<Float> = ArrayDeque(arrayListOf(0F))
-    val queueCapacity: Int = 15
+    val queueCapacity: Int = 25
 
     val stringQueue: ArrayDeque<String> = ArrayDeque(30)
 
