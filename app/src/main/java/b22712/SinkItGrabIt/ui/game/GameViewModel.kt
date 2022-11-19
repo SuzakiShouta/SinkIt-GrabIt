@@ -55,9 +55,29 @@ class GameViewModel(application: MainApplication) : ViewModel() {
             if(app.fishExist.value == true){
                 fishGrab()
             }
-        } else {
-//            app.vibratorAction.vibrateStop()
+        } else if (isFishGrab.value == true && !push) {
+            Log.d(LOGNAME, "離しちゃった")
+            setFishGrab(false)
+            app.vibratorAction.vibrateStop()
         }
+    }
+
+    //
+    var wasGrab: Boolean = false
+    fun fishSilhouette(grab: Boolean, view: View) {
+        if (!wasGrab && grab) {
+            Log.d(LOGNAME, "Re")
+            view.visibility = View.VISIBLE
+            view.alpha = 1.0f
+            AnimationProvider().fadeIn(view, 1)
+            Log.d(LOGNAME, view.alpha.toString().plus(",").plus(view.visibility))
+        } else if (wasGrab && !grab) {
+            Log.d(LOGNAME, "fadeout")
+            view.visibility = View.INVISIBLE
+            AnimationProvider().fadeOut(view, 1000)
+            Log.d(LOGNAME, view.alpha.toString().plus(",").plus(view.visibility))
+        }
+        wasGrab = grab
     }
 
     fun fishGrab() {
@@ -67,8 +87,11 @@ class GameViewModel(application: MainApplication) : ViewModel() {
 
         val hnd0 = Handler()
         val task = Runnable {
-            app.vibratorAction.vibrateStop()
-            setFishGrab(false)
+            if (isFishGrab.value == true) {
+                app.vibratorAction.vibrateStop()
+                setFishGrab(false)
+                Log.d(LOGNAME, "逃げちゃった")
+            }
         }
         hnd0.postDelayed(task,5000)
     }

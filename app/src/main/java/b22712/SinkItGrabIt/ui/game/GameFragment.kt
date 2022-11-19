@@ -61,29 +61,19 @@ class GameFragment : Fragment() {
 
         app.push.observe(viewLifecycleOwner) {
             gameViewModel.push(it)
-            if(it) {
-                binding.textPush.text = "押してる！"
-                if(app.fishExist.value == true) {
-                    binding.textFish.text = "捕獲！"
-                }
-            } else {
-                binding.textPush.text = "押してない！"
-            }
         }
 
         app.fishExist.observe(viewLifecycleOwner){
             if(it){
-                binding.textFish.text = "魚がいます"
                 app.vibratorAction.vibrate(3000, 100)
-                Log.d(LOGNAME, "魚がいます")
-            } else {
-                binding.textFish.text = "魚がいません"
-                Log.d(LOGNAME, "魚がいません")
             }
         }
 
+        gameViewModel.isFishGrab.observe(viewLifecycleOwner) {
+            gameViewModel.fishSilhouette(it, binding.imgSilhouette)
+        }
+
         app.inWater.observe(viewLifecycleOwner) {
-            Log.d(LOGNAME, "inWater $it , isFishGrab ${gameViewModel.isFishGrab.value!!}")
             if (!it && gameViewModel.isFishGrab.value!!) {
                 gameViewModel.setFishGrab(false)
                 gameViewModel.createGetFishFragment(this, binding.layoutResult.id)
@@ -92,14 +82,6 @@ class GameFragment : Fragment() {
 
         binding.buttonBuck.setOnClickListener {
             activity?.finish();
-        }
-
-        gameViewModel.isFishGrab.observe(viewLifecycleOwner) {
-            if(it){
-                binding.imgSilhouette.visibility = View.VISIBLE
-            } else {
-                binding.imgSilhouette.visibility = View.INVISIBLE
-            }
         }
     }
 

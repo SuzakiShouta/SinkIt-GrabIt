@@ -80,6 +80,7 @@ class Estimation(application: MainApplication) {
         } else {
             app.queue.addGrabQueue(false)
         }
+        Log.d(LOGNAME, "push = $push, grip = $grip, grab = $wasGrab, Rera".plus(queue.queue.last()))
 
         app.setPush(push)
         app.setGrip(grip)
@@ -126,6 +127,7 @@ class Estimation(application: MainApplication) {
         }
         basePressure = sum / (queue.size)
         Log.d(LOGNAME, "basePressure = $basePressure, sum = $sum, size = ${queue.size}")
+//        basePressure = 500f
     }
 
 

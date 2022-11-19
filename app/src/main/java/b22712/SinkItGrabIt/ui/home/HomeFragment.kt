@@ -55,7 +55,6 @@ class HomeFragment : Fragment() {
         }
 
         app.push.observe(viewLifecycleOwner){
-            Log.d(LOGNAME, "push is ".plus(it))
             if(homeViewModel.startGamePreparation(it)) {
                 homeViewModel.startGame(this)
             }
@@ -69,7 +68,6 @@ class HomeFragment : Fragment() {
         }
 
         app.grip.observe(viewLifecycleOwner) {
-            Log.d(LOGNAME, "grab is ".plus(it))
             if(homeViewModel.startGamePreparationByGrip(it)) {
                 homeViewModel.startGame(this)
             }

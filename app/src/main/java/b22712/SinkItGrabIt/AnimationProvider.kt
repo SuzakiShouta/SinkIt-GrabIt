@@ -3,6 +3,7 @@ package b22712.SinkItGrabIt
 import android.animation.*
 import android.view.View
 import android.view.animation.AccelerateInterpolator
+import android.view.animation.AlphaAnimation
 import java.util.stream.IntStream.range
 import kotlin.math.floor
 
@@ -39,4 +40,28 @@ class AnimationProvider {
         set.playSequentially(animatorList) // 順番にアニメーションを実施
         set.start()
     }
+
+    fun fadeOut(target: View, ms: Long){
+        // アルファ値を1.0fから0.0fへ変化させるフェードアウトアニメーション
+        val fadeAnim = AlphaAnimation(1.0f, 0.0f)
+        // n秒間(n000ミリ秒)かけて行う
+        fadeAnim.duration = ms
+        // アルファ値をアニメーション終了後の値を維持する
+        fadeAnim.fillAfter = true
+
+        // textViewという変数名のテキストビューにアニメーションを適用する
+        target.animation = fadeAnim
+    }
+
+    fun fadeIn(target: View, ms: Long){
+        val fadeAnim = AlphaAnimation(0.0f, 1.0f)
+        // n秒間(n000ミリ秒)かけて行う
+        fadeAnim.duration = ms
+        // アルファ値をアニメーション終了後の値を維持する
+        fadeAnim.fillAfter = true
+
+        // textViewという変数名のテキストビューにアニメーションを適用する
+        target.animation = fadeAnim
+    }
+
 }
