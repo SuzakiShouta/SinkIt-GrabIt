@@ -39,24 +39,14 @@ class GameViewModel(application: MainApplication) : ViewModel() {
     }
 
     var bubbles: ArrayList<Bubble> = arrayListOf()
-    var wasInWater: Boolean = false
     fun bubble(view: View) {
         val bubble = Bubble(view)
         bubble.setFragmentSize(width,height)
         bubbles.add(bubble)
-        if (!wasInWater){
-            for (bubble in bubbles){
-                bubble.reStart()
-            }
-        }
-        wasInWater = true
     }
 
     fun bubbleCrash(){
-        wasInWater = false
-        for (bubble in bubbles) {
-            bubble.stop()
-        }
+        var bubbles: ArrayList<Bubble> = arrayListOf()
     }
 
     fun push(push: Boolean) {
@@ -66,9 +56,9 @@ class GameViewModel(application: MainApplication) : ViewModel() {
                 fishGrab()
             }
         } else if (isFishGrab.value == true && !push) {
-            Log.d(LOGNAME, "離しちゃった")
-            setFishGrab(false)
-            app.vibratorAction.vibrateStop()
+//            Log.d(LOGNAME, "離しちゃった")
+//            setFishGrab(false)
+//            app.vibratorAction.vibrateStop()
         }
     }
 
