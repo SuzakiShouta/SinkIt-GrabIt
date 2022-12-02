@@ -26,11 +26,11 @@ class Estimation(application: MainApplication) {
     var pressureRelativeNum: Int = baseFrequency/5 //何データ見るか
 
     var isInWater: Boolean = false
-    val inWaterThreshold: Float = 2F //hPa
+    val inWaterThreshold: Float = 3F //hPa
 
     fun setFrequency(frequency: Int) {
-        pushTime = frequency/7
-        pressureRelativeNum = frequency/5
+        pushTime = frequency/6
+        pressureRelativeNum = frequency/2
         Log.d(LOGNAME, "f $frequency")
     }
 
@@ -98,7 +98,7 @@ class Estimation(application: MainApplication) {
 //        Log.d(LOGNAME, "Base = $basePressure, now ${queue.queue.last()}")
 
         if (pressureStability) {
-            isInWater = queue.queue.last() > basePressure + inWaterThreshold
+            isInWater = queue.queue[queue.queue.size - pushTime - 1] > basePressure + inWaterThreshold
             app.setInWater(isInWater)
         } else {
             app.setInWater(isInWater)
